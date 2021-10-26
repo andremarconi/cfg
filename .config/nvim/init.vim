@@ -15,6 +15,8 @@ Plug 'jiangmiao/auto-pairs'
 " Auto close HTML tags
 Plug 'alvan/vim-closetag'
 
+" The plugin provides mappings to easily delete, change and add such surroundings in pairs
+Plug 'tpope/vim-surround'
 " Post install (yarn install | npm install) then load plugin only for editing supported files
 " Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
@@ -29,6 +31,9 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " fzf is a general-purpose command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" NERDTree is a file system explorer
+Plug 'preservim/nerdtree'
 
 call plug#end()
 
@@ -75,3 +80,10 @@ nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
+" Mapping FZF
+nmap <C-P> :FZF<CR>
+" - down / up / left / right
+let g:fzf_layout = { 'down': '40%' }
+
+" NERDTree
+nnoremap <C-t> :NERDTreeToggle<CR>

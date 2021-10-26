@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # CoreUtils, grep e sed
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:$PATH"
+export PATH=~/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/andre/.oh-my-zsh"
 
@@ -106,7 +106,7 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim='nvim'
-
+alias config='/usr/bin/git --git-dir=/Users/andre/.cfg/ --work-tree=/Users/andre'
+alias manut='sh manut.sh'
 # Iterm e Tmux integration
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-alias config='/usr/bin/git --git-dir=/Users/andre/.cfg/ --work-tree=/Users/andre'
