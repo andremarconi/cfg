@@ -1,84 +1,122 @@
-unlet! skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+set nocompatible        " not vi compatible
+
+" Settings
+filetype plugin indent on " enable file type detection
+syntax on                 " turn on syntax highlighting
+set showmatch             " show matching braces when text indicator is over them
+set autoindent
+set number                " number lines
+set relativenumber        " relative line numbering
+
+set noerrorbells visualbell t_vb=
+
+" Always show the status line at the bottom, even if you only have one window open.
+set laststatus=2
+
+" The backspace key has slightly unintuitive behavior by default. For example,
+" by default, you can't backspace before the insertion point set with 'i'.
+" This configuration makes backspace behave more reasonably, in that you can
+" backspace over anything.
+set backspace=indent,eol,start
+
+" By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
+" shown in any window) that has unsaved changes. This is to prevent you from "
+" forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
+" hidden buffers helpful enough to disable this protection. See `:help hidden`
+" for more information on this.
+set hidden
+
+" This setting makes search case-insensitive when all characters in the string
+" being searched are lowercase. However, the search becomes case-sensitive if
+" it contains any capital letters. This makes searching more convenient.
+set ignorecase
+set smartcase
+
+" Enable searching as you type, rather than waiting till you press enter.
+set incsearch
+
+" Enable mouse support. You should avoid relying on this too much, but it can
+" sometimes be convenient.
+set mouse+=a
+
+set path+=**              " Search down into subfolders
+set wildmenu
+set nowrap
+if !('nvim')
+  set clipboard=unnamed
+else
+  set clipboard+=unnamedplus
+endif
+if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && v:version >= 700
+  let &g:listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+  let &g:fillchars = "vert:\u250b,fold:\u00b7"
+else
+  setglobal listchars=tab:>\ ,trail:-,extends:>,precedes:<
+endif
+" Make it obvious where 80 characters is
+" set textwidth=80
+" set colorcolumn=+1
+set colorcolumn=80
+
+" Color Scheme
+" Os 'Schemes' estão no folder colors
+set background=dark     " Setting dark mode
+
+let g:gruvbox_italic = '1'
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
+
+" colorscheme uwu
 
 
-filetype plugin indent on      " Re-enable after setup
-syntax enable                  " Enable vim syntax highlighting as is (enable != on)
-set shell=$SHELL               " Set the default shell
-set termencoding=utf-8         " Set the default encodings just in case $LANG isn't set
-set encoding=utf-8             " Set the default encodings just in case $LANG isn't set
-set autoindent                 " Indent the next line matching the previous line
-set smartindent                " Smart auto-indent when creating a new line
-set tabstop=2                  " Number of spaces each tab counts for
-set shiftwidth=2               " The space << and >> moves the lines
-set softtabstop=2              " Number of spaces for some tab operations
-set shiftround                 " Round << and >> to multiples of shiftwidth
-set expandtab                  " Insert spaces instead of actual tabs
-set smarttab                   " Delete entire shiftwidth of tabs when they're inserted
-set history=1000               " The number of history items to remember
-set backspace=indent,eol,start " Backspace settings
-set nostartofline              " Keep cursor in the same place after saves
-set showcmd                    " Show command information on the right side of the command line
-set ttyfast                 " Set that we have a fast terminal
-set t_Co=256                " Explicitly tell Vim that the terminal supports 256 colors
-set lazyredraw              " Don't redraw vim in all situations
-set synmaxcol=500           " The max number of columns to try and highlight
-set noerrorbells            " Don't make noise
-set autoread                " Watch for file changes and auto update
-set showmatch               " Set show matching parenthesis
-set matchtime=2             " The amount of time matches flash
-set display=lastline        " Display super long wrapped lines
-set number                  " Shows line numbers
-set nrformats-=octal        " Never use octal notation
-set nojoinspaces            " Don't add 2 spaces when using J
-set mouse=a                 " Enable using the mouse if terminal emulator
-set mousehide               " Hide the mouse on typing
-set hlsearch                " Highlight search terms
-set incsearch               " Show searches as you type
-set wrap                    " Softwrap text
-set linebreak               " Don't wrap in the middle of words
-set ignorecase              " Ignore case when searching
-set smartcase               " Ignore case if search is lowercase, otherwise case-sensitive
-set title                   " Change the terminal's title
-set updatetime=2000         " Set the time before plugins assume you're not typing
-set scrolloff=5             " Lines the cursor is to the edge before scrolling
-set sidescrolloff=5         " Same as scrolloff but horizontal
-set gdefault                " Adds g at the end of substitutions by default
-set exrc                    " Source local .vimrc files
-set secure                  " Don't load autocmds from local .vimrc files
-set tags^=.tags,.git/tags   " Add local .tags file
+if has('nvim')
+  " Phython config (Phython 2 desabilitado)
+  let g:loaded_python_provider = 0
+  let g:python3_host_prog = '/usr/local/bin/python3'
 
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
+  " Disable Ruby support
+  let g:loaded_ruby_provider = 0
+
+  " Disable Perl support
+  let g:loaded_perl_provider = 0
+
+  " Disable Node.js support
+  let g:loaded_node_provider = 0
 endif
 
+set wildignorecase
+set wildignore+=.git,.hg,.svn,.stversions,*.pyc,*.spl,*.o,*.out,*~,%*
+set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
+set wildignore+=**/node_modules/**,**/bower_modules/**,*/.sass-cache/*
+set wildignore+=__pycache__,*.egg-info,.pytest_cache,.mypy_cache/**
 
-" https://kinbiko.com/vim/my-shiniest-vim-gems/
-" Remove comments when joining lines with J
-set formatoptions+=j
 
-" Make |:find| discover recursive paths
-set path+=**
+" Try to prevent bad habits like using the arrow keys for movement. This is
+" not the only possible bad habit. For example, holding down the h/j/k/l keys
+" for movement, rather than using more efficient movement commands, is also a
+" bad habit. The former is enforceable through a .vimrc, while we don't know
+" how to prevent the latter.
+" Do this in normal mode...
+nnoremap <Left>  :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
+" ...and in insert mode
+inoremap <Left>  <ESC>:echoe "Use h"<CR>
+inoremap <Right> <ESC>:echoe "Use l"<CR>
+inoremap <Up>    <ESC>:echoe "Use k"<CR>
+inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
-" Completion options
-set complete=.,w,b,u,t,kspell
-set completeopt=menuone,noselect
-set wildmenu                                           " Better completion in the CLI
-set wildmode=longest:full,full                         " Completion settings
+" unbind keys
+map <C-a> <Nop>
+map <C-x> <Nop>
+nmap Q <Nop>
 
-" Ignore these folders for completions
-set wildignore+=.hg,.git,.svn                          " Version control
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg         " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc " compiled object files
-set wildignore+=*.resolved                             " package manager lock files
-set wildignore+=tags,.tags
+" Leader
+let mapleader = ","
+" Editar, salvar e carregar o .vimrc
+nnoremap ev :e $MYVIMRC<CR>
+nnoremap rv :w!<Esc>:source $MYVIMRC<CR>
 
-if has('clipboard')     " If the feature is available
-  set clipboard=unnamed " copy to the system clipboard
-
-  if has('unnamedplus')
-    set clipboard+=unnamedplus
-  endif
-endif
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>

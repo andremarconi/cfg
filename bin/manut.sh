@@ -9,6 +9,6 @@ brew cleanup --prune=all
 
 echo "Removendo arquivos ~/."
 cd ~
-rm -rf .cache .local .config/iterm2 .viminfo .zsh_history .zcompdump-André’s\ Mac\ mini-5.8
+rm -rf .DS_Store .bash_history .cache .local .config/iterm2 .lesshst .npm .viminfo .zsh_history .zsh_sessions .zcompdump-André’s\ Mac\ mini-5.8
 echo "Arquivos removidos."
 exit
