@@ -108,5 +108,6 @@ export EDITOR='nvim'
 alias vim='nvim'
 alias config='/usr/bin/git --git-dir=/Users/andre/.cfg/ --work-tree=/Users/andre'
 alias manut='sh manut.sh'
+alias atu='sh atu.sh'
 # Iterm e Tmux integration
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES

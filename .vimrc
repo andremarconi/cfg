@@ -61,12 +61,11 @@ set colorcolumn=80
 " Color Scheme
 " Os 'Schemes' estão no folder colors
 set background=dark     " Setting dark mode
-
+let g:gruvbox_bold = '1'
 let g:gruvbox_italic = '1'
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+autocmd vimenter * ++nested colorscheme gruvbox
 
-" colorscheme uwu
 
 
 if has('nvim')
