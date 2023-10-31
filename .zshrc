@@ -76,7 +76,7 @@ plugins=(
     macos
     zsh-autosuggestions
     )
-
+zstyle ':omz:lib:theme-and-appearance' gnu-ls yes
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -111,3 +111,7 @@ alias manut='sh manut.sh'
 alias atu='sh atu.sh'
 # Iterm e Tmux integration
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
